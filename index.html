@@ -1,249 +1,291 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini Avito PRO – 30 объявлений</title>
-<style>
-body{margin:0;font-family:Arial, sans-serif;background:#f3f4f6;}
-header{position:sticky;top:0;z-index:1000;background:linear-gradient(135deg,#00aaff,#0077cc);color:white;padding:12px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
-.logo{font-size:20px;font-weight:bold}
-.search-bar{display:flex;gap:8px;flex-wrap:wrap}
-.search-bar input,.search-bar select{padding:6px;border-radius:6px;border:none}
-.container{max-width:1200px;margin:20px auto;padding:0 15px}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
-.controls select,.controls button{padding:6px 10px;border-radius:6px;border:1px solid #ccc;cursor:pointer}
-.ads{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:15px}
-.ad-card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.08);transition:.2s;cursor:pointer;position:relative}
-.ad-card:hover{transform:translateY(-4px)}
-.ad-image{width:100%;height:170px;object-fit:cover}
-.ad-body{padding:10px}
-.price{font-weight:bold;color:#0077cc}
-.location{font-size:13px;color:gray}
-.favorite{position:absolute;top:8px;right:8px;background:white;border-radius:50%;padding:6px;font-size:16px;cursor:pointer}
-.favorite.active{color:red}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);justify-content:center;align-items:center}
-.modal-content{background:white;padding:20px;border-radius:12px;max-width:650px;width:95%;max-height:90%;overflow:auto;position:relative}
-.close-btn{position:absolute;top:8px;right:12px;font-size:22px;cursor:pointer}
-.chat-box{border:1px solid #ddd;height:200px;overflow-y:auto;padding:8px;margin-top:10px;border-radius:8px;background:#fafafa}
-.message{margin-bottom:6px;padding:6px 10px;border-radius:8px;max-width:70%}
-.me{background:#3b82f6;color:white;margin-left:auto}
-.seller{background:#e5e7eb}
-.chat-input{display:flex;gap:5px;margin-top:8px}
-.chat-input input{flex:1;padding:6px;border-radius:6px;border:1px solid #ccc}
-.chat-input button{padding:6px 10px;border:none;border-radius:6px;background:#0077cc;color:white;cursor:pointer}
-@media(max-width:768px){.ads{grid-template-columns:1fr}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Свадебное приглашение Никиты и Юлии. 18 апреля 2026 года.">
+    <title>Никита & Юлия | Свадебное приглашение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- html2canvas для скриншотов -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f5f5f5; font-family: 'Inter', sans-serif; color: #1e1e1e; scroll-behavior: smooth; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Hero секция */
+        .hero { min-height: 100vh; background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%); display: flex; align-items: center; justify-content: center; text-align: center; position: relative; }
+        .hero-content { max-width: 800px; padding: 48px 32px; background: rgba(20, 20, 20, 0.75); backdrop-filter: blur(12px); border-radius: 48px; margin: 20px; animation: fadeInUp 1s ease-out; border: 1px solid rgba(255,255,255,0.15); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero h1 { font-size: 4.2rem; font-weight: 700; color: #ffffff; }
+        .hero .names { font-size: 1.8rem; font-weight: 500; border-top: 2px solid #fff; border-bottom: 2px solid #fff; display: inline-block; padding: 12px 24px; margin: 20px 0; color: #fff; }
+        .date-badge { font-size: 1.4rem; background: rgba(255,255,255,0.1); display: inline-block; padding: 8px 28px; border-radius: 60px; margin-top: 20px; color: #fff; }
+        .btn-rsvp { background: #fff; color: #1a1a1a; border: none; padding: 14px 38px; font-size: 1.1rem; font-weight: 600; border-radius: 50px; margin-top: 32px; cursor: pointer; transition: all 0.3s ease; }
+        .btn-rsvp:hover { background: #e0e0e0; transform: scale(1.02); }
+        
+        section { padding: 80px 0; border-bottom: 1px solid #e0e0e0; }
+        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 48px; font-weight: 600; color: #1a1a1a; position: relative; }
+        .section-title:after { content: ''; display: block; width: 80px; height: 2px; background: #333; margin: 16px auto 0; }
+        
+        .details-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+        .detail-card { background: #fff; padding: 32px 24px; border-radius: 32px; text-align: center; flex: 1; min-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eaeaea; }
+        .detail-card i { font-size: 2.8rem; color: #2c2c2c; margin-bottom: 20px; }
+        
+        .timeline { max-width: 700px; margin: 0 auto; background: #fff; border-radius: 48px; padding: 24px 32px; }
+        .timeline-item { display: flex; padding: 20px 0; border-bottom: 1px dashed #ddd; }
+        .timeline-time { font-weight: 700; width: 110px; font-size: 1.2rem; }
+        
+        /* Форма и билет */
+        .rsvp-form { background: #fff; max-width: 750px; margin: 0 auto; padding: 40px 32px; border-radius: 48px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .form-group { margin-bottom: 24px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; }
+        input, select { width: 100%; padding: 14px 18px; border: 1px solid #d0d0d0; border-radius: 60px; font-size: 1rem; }
+        .radio-group { display: flex; gap: 24px; margin-top: 8px; flex-wrap: wrap; }
+        .radio-group label { display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer; }
+        button[type="submit"] { background: #1a1a1a; color: white; border: none; width: 100%; padding: 14px; font-size: 1.1rem; font-weight: 600; border-radius: 60px; cursor: pointer; }
+        button[type="submit"]:hover { background: #2c2c2c; }
+        
+        /* Стиль билета-скриншота */
+        .ticket-container { display: none; margin-top: 30px; text-align: center; }
+        .ticket-card { background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%); border-radius: 32px; padding: 40px; max-width: 550px; margin: 0 auto; box-shadow: 0 25px 50px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden; }
+        .ticket-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #fff, #888, #fff); }
+        .ticket-card h3 { font-size: 1.2rem; letter-spacing: 3px; color: #aaa; margin-bottom: 20px; text-transform: uppercase; }
+        .ticket-card .guest-name { font-size: 2.2rem; font-weight: 700; color: #fff; font-family: 'Playfair Display', serif; margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 10px 20px; }
+        .ticket-card .wedding-date { font-size: 1.4rem; color: #ddd; margin: 15px 0; }
+        .ticket-card .location { font-size: 1rem; color: #bbb; margin: 10px 0; }
+        .ticket-card .badge-guest { background: rgba(255,255,255,0.15); display: inline-block; padding: 8px 24px; border-radius: 40px; font-size: 0.9rem; font-weight: 600; color: #fff; margin-top: 20px; letter-spacing: 1px; }
+        .ticket-card .qr-symbol { font-size: 3rem; margin-top: 20px; opacity: 0.7; }
+        .ticket-card .footer-note { font-size: 0.7rem; color: #888; margin-top: 25px; border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 15px; }
+        .btn-screenshot { background: #2c6e4f; color: white; border: none; padding: 12px 28px; border-radius: 40px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 20px; transition: all 0.3s; }
+        .btn-screenshot:hover { background: #1e4f38; transform: scale(1.02); }
+        .btn-download { background: #1a1a1a; margin-left: 12px; }
+        .btn-download:hover { background: #333; }
+        .rsvp-message { text-align: center; margin-top: 20px; padding: 12px; border-radius: 50px; }
+        
+        .gallery { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+        .gallery img { width: 280px; height: 280px; object-fit: cover; border-radius: 28px; filter: grayscale(100%); transition: all 0.3s; }
+        .gallery img:hover { filter: grayscale(0%); transform: scale(1.03); }
+        
+        footer { background: #0a0a0a; color: #aaa; text-align: center; padding: 48px 32px; }
+        .countdown { background: rgba(255,255,255,0.08); border-radius: 60px; padding: 12px 20px; display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+        .countdown span { font-size: 1.5rem; font-weight: 700; color: #fff; }
+        .floating-hearts { position: fixed; bottom: 20px; right: 20px; font-size: 2rem; opacity: 0.4; pointer-events: none; animation: float 3s ease-in-out infinite; color: #2c2c2c; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 2.8rem; }
+            .ticket-card .guest-name { font-size: 1.5rem; }
+            .ticket-card { padding: 25px; }
+        }
+    </style>
 </head>
 <body>
-
-<header>
-<div class="logo">Mini Avito PRO</div>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="Поиск...">
-<select id="sortSelect">
-<option value="new">Сначала новые</option>
-<option value="priceAsc">Цена ↑</option>
-<option value="priceDesc">Цена ↓</option>
-</select>
-</div>
-</header>
-
-<div class="container">
-<div class="controls">
-<select id="categoryFilter">
-<option value="">Все категории</option>
-<option>Телефоны</option>
-<option>Ноутбуки</option>
-<option>Авто</option>
-<option>Недвижимость</option>
-<option>Бытовая техника</option>
-<option>Хобби</option>
-</select>
-<button onclick="toggleOnlyFavorites()">Избранное</button>
-</div>
-<div class="ads" id="adsContainer"></div>
-</div>
-
-<div class="modal" id="modal" onclick="overlayClick(event)">
-<div class="modal-content">
-<span class="close-btn" onclick="closeModal()">×</span>
-<div id="modalBody"></div>
-</div>
-</div>
-
-<script>
-const ads = [];
-const demoImages = [
-"https://upload.wikimedia.org/wikipedia/commons/3/3a/IPhone_13_Starlight.png",
-"https://upload.wikimedia.org/wikipedia/commons/9/9d/MacBook_Pro_M1_2021.png",
-"https://upload.wikimedia.org/wikipedia/commons/3/32/2018_Toyota_Camry_%28ASV70R%29_Grande_sedan_%282018-10-13%29_01.jpg",
-"https://upload.wikimedia.org/wikipedia/commons/8/88/Interior_of_a_living_room.jpg",
-"https://upload.wikimedia.org/wikipedia/commons/2/2c/Washing_machine.jpg",
-"https://upload.wikimedia.org/wikipedia/commons/4/4a/Mountain_bike.jpg"
-];
-
-const templates = [
-["iPhone 13","Телефоны",45000],
-["Samsung Galaxy S22","Телефоны",42000],
-["iPhone 12","Телефоны",39000],
-["MacBook Pro M1","Ноутбуки",120000],
-["ASUS VivoBook","Ноутбуки",52000],
-["Lenovo IdeaPad","Ноутбуки",48000],
-["Toyota Camry 2018","Авто",1500000],
-["Kia Rio 2020","Авто",980000],
-["Hyundai Solaris 2019","Авто",930000],
-["1‑к квартира, центр","Недвижимость",5400000],
-["2‑к квартира, новостройка","Недвижимость",7200000],
-["Дача с участком","Недвижимость",3100000],
-["Стиральная машина LG","Бытовая техника",23000],
-["Холодильник Bosch","Бытовая техника",35000],
-["Пылесос Xiaomi","Бытовая техника",12000],
-["Горный велосипед","Хобби",18000],
-["Электросамокат","Хобби",26000],
-["Гитара акустическая","Хобби",9000]
-];
-
-let idCounter=1;
-while(ads.length<30){
-    const t = templates[Math.floor(Math.random()*templates.length)];
-    ads.push({
-        id:idCounter++,
-        title:t[0],
-        category:t[1],
-        price:t[2]+Math.floor(Math.random()*5000),
-        location:["Москва","Казань","Санкт‑Петербург","Самара","Екатеринбург"][Math.floor(Math.random()*5)],
-        image:demoImages[Math.floor(Math.random()*demoImages.length)],
-        description:"Описание объявления. Полностью рабочий демо‑макет.",
-        created:Date.now()-Math.floor(Math.random()*100000000)
-    });
-}
-
-let favorites = JSON.parse(localStorage.getItem("favorites30")||"[]");
-let chats = JSON.parse(localStorage.getItem("chats30")||"{}");
-let onlyFavorites=false;
-
-function saveData(){
-localStorage.setItem("favorites30",JSON.stringify(favorites));
-localStorage.setItem("chats30",JSON.stringify(chats));
-}
-
-function toggleOnlyFavorites(){
-onlyFavorites=!onlyFavorites;
-renderAds();
-}
-
-function isFav(id){return favorites.includes(id);}
-
-function toggleFav(id){
-if(isFav(id)) favorites=favorites.filter(f=>f!==id);
-else favorites.push(id);
-saveData();
-renderAds();
-}
-
-function renderAds(){
-const container=document.getElementById("adsContainer");
-container.innerHTML="";
-
-let list=[...ads];
-
-const search=document.getElementById("searchInput").value.toLowerCase();
-const cat=document.getElementById("categoryFilter").value;
-
-if(search) list=list.filter(a=>a.title.toLowerCase().includes(search));
-if(cat) list=list.filter(a=>a.category===cat);
-if(onlyFavorites) list=list.filter(a=>favorites.includes(a.id));
-
-const sort=document.getElementById("sortSelect").value;
-if(sort==="priceAsc") list.sort((a,b)=>a.price-b.price);
-if(sort==="priceDesc") list.sort((a,b)=>b.price-a.price);
-if(sort==="new") list.sort((a,b)=>b.created-a.created);
-
-list.forEach(ad=>{
-const card=document.createElement("div");
-card.className="ad-card";
-card.innerHTML=`
-<div class="favorite ${isFav(ad.id)?'active':''}" onclick="event.stopPropagation();toggleFav(${ad.id})">❤</div>
-<img src="${ad.image}" class="ad-image" loading="lazy"
-onerror="this.src='https://via.placeholder.com/600x400?text=No+Image'">
-<div class="ad-body">
-<h3>${ad.title}</h3>
-<div class="price">${ad.price.toLocaleString()} ₽</div>
-<div class="location">${ad.location}</div>
-<div class="location">${ad.category}</div>
-</div>`;
-card.onclick=()=>openAd(ad.id);
-container.appendChild(card);
-});
-}
-
-function openAd(id){
-const ad=ads.find(a=>a.id===id);
-document.body.style.overflow="hidden";
-document.getElementById("modalBody").innerHTML=`
-<img src="${ad.image}" style="width:100%;border-radius:10px" loading="lazy">
-<h2>${ad.title}</h2>
-<p><b>Категория:</b> ${ad.category}</p>
-<p><b>Цена:</b> ${ad.price.toLocaleString()} ₽</p>
-<p><b>Город:</b> ${ad.location}</p>
-<p>${ad.description}</p>
-<button onclick="openChat(${ad.id})">Написать продавцу</button>
-<div id="chatContainer"></div>`;
-document.getElementById("modal").style.display="flex";
-}
-
-function closeModal(){
-document.getElementById("modal").style.display="none";
-document.body.style.overflow="auto";
-}
-
-function overlayClick(e){
-if(e.target.id==="modal") closeModal();
-}
-
-function openChat(id){
-if(!chats[id]) chats[id]=[];
-document.getElementById("chatContainer").innerHTML=`
-<div class="chat-box" id="chatBox"></div>
-<div class="chat-input">
-<input id="chatInput" placeholder="Сообщение">
-<button onclick="sendMessage(${id})">Отправить</button>
-</div>`;
-renderChat(id);
-}
-
-function sendMessage(id){
-const input=document.getElementById("chatInput");
-if(!input.value) return;
-chats[id].push({text:input.value,type:"me"});
-setTimeout(()=>{
-chats[id].push({text:"Здравствуйте! Спасибо за сообщение.",type:"seller"});
-saveData();
-renderChat(id);
-},600);
-input.value="";
-saveData();
-renderChat(id);
-}
-
-function renderChat(id){
-const box=document.getElementById("chatBox");
-box.innerHTML="";
-(chats[id]||[]).forEach(m=>{
-const d=document.createElement("div");
-d.className="message "+m.type;
-d.textContent=m.text;
-box.appendChild(d);
-});
-box.scrollTop=box.scrollHeight;
-}
-
-document.getElementById("searchInput").addEventListener("input",renderAds);
-document.getElementById("sortSelect").addEventListener("change",renderAds);
-document.getElementById("categoryFilter").addEventListener("change",renderAds);
-
-renderAds();
-</script>
+    <div class="floating-hearts"><i class="fas fa-heart"></i></div>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Мы женимся</h1>
+            <div class="names">Никита <i class="fas fa-heart"></i> Юлия</div>
+            <div class="date-badge"><i class="fas fa-calendar-alt"></i> 18 апреля 2026</div>
+            <div id="countdown-timer" class="countdown"></div>
+            <button class="btn-rsvp" onclick="document.getElementById('rsvp').scrollIntoView({behavior: 'smooth'});">Подтвердить присутствие</button>
+        </div>
+    </section>
+    
+    <section id="details"><div class="container"><h2 class="section-title">Детали праздника</h2><div class="details-grid"><div class="detail-card"><i class="fas fa-map-marker-alt"></i><h3>Локация</h3><p>Усадьба «Березовая роща»<br>Московская область, д. Сокольники, ул. Цветочная, 12</p></div><div class="detail-card"><i class="fas fa-clock"></i><h3>Время</h3><p>Сбор гостей: 15:30<br>Церемония: 16:00<br>Банкет до 23:00</p></div><div class="detail-card"><i class="fas fa-dress-code"></i><h3>Дресс-код</h3><p>Black & White Elegant 🖤🤍</p></div></div></div></section>
+    
+    <section id="program"><div class="container"><h2 class="section-title">Программа дня</h2><div class="timeline"><div class="timeline-item"><div class="timeline-time">15:30</div><div class="timeline-desc">Встреча гостей, welcome-фуршет</div></div><div class="timeline-item"><div class="timeline-time">16:00</div><div class="timeline-desc">Церемония бракосочетания</div></div><div class="timeline-item"><div class="timeline-time">17:00</div><div class="timeline-desc">Фотосессия & фуршет</div></div><div class="timeline-item"><div class="timeline-time">18:30</div><div class="timeline-desc">Свадебный ужин, танцы</div></div><div class="timeline-item"><div class="timeline-time">23:00</div><div class="timeline-desc">Завершение, трансфер</div></div></div></div></section>
+    
+    <section id="story"><div class="container"><h2 class="section-title">Наша история</h2><div class="story-card" style="max-width:780px; margin:0 auto; text-align:center; background:#fff; padding:32px; border-radius:48px;"><p>✨ Познакомились в книжном кафе, а поняли, что не можем друг без друга — на Байкале. Ждём вас разделить нашу радость!</p><hr style="margin:20px 0;"><p><strong>С любовью, Никита и Юлия</strong> ❤️</p></div></div></section>
+    
+    <section id="gallery"><div class="container"><h2 class="section-title">Вдохновение</h2><div class="gallery"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Кольца"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400" alt="Букет"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400" alt="Торт"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400" alt="Декор"></div></div></section>
+    
+    <section id="rsvp">
+        <div class="container">
+            <h2 class="section-title">Подтвердите участие</h2>
+            <div class="rsvp-form" id="rsvpFormContainer">
+                <form id="rsvpForm">
+                    <div class="form-group"><label>Ваше имя и фамилия *</label><input type="text" id="guestName" placeholder="Анна Михайлова" required></div>
+                    <div class="form-group"><label>Email или телефон *</label><input type="text" id="contact" placeholder="example@mail.ru / +7 999 123-45-67" required></div>
+                    <div class="form-group"><label>Количество гостей</label><select id="guestsCount"><option value="1">1 гость</option><option value="2">2 гостя</option><option value="3">3 гостя</option><option value="4">4 гостя</option></select></div>
+                    <div class="form-group"><label>Буду на свадьбе?</label><div class="radio-group"><label><input type="radio" name="attending" value="yes" checked> Да, с радостью!</label><label><input type="radio" name="attending" value="no"> К сожалению, не смогу</label></div></div>
+                    <div class="form-group"><label>Пожелания</label><input type="text" id="comments" placeholder="Аллергии, вегетарианство..."></div>
+                    <button type="submit" id="submitBtn">Отправить RSVP</button>
+                    <div id="formFeedback" class="rsvp-message"></div>
+                </form>
+                
+                <!-- Контейнер для билета-скриншота -->
+                <div id="ticketContainer" class="ticket-container">
+                    <div id="ticketForScreenshot" class="ticket-card">
+                        <h3><i class="fas fa-envelope-open-text"></i> ВАШЕ ИМЕННОЕ ПРИГЛАШЕНИЕ</h3>
+                        <div class="guest-name" id="ticketGuestName">Анна Михайлова</div>
+                        <div class="wedding-date"><i class="fas fa-calendar-alt"></i> 18 апреля 2026 | 16:00</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Усадьба «Березовая роща», Московская обл.</div>
+                        <div class="badge-guest"><i class="fas fa-user-check"></i> ПОЧЁТНЫЙ ГОСТЬ</div>
+                        <div class="qr-symbol"><i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i></div>
+                        <div class="footer-note">Пожалуйста, сохраните этот билет. Ждём вас на нашем празднике! 🖤🤍</div>
+                    </div>
+                    <div>
+                        <button class="btn-screenshot" id="screenshotBtn"><i class="fas fa-camera"></i> Сделать скриншот билета</button>
+                        <button class="btn-screenshot btn-download" id="downloadBtn" style="display:none;"><i class="fas fa-download"></i> Сохранить как фото</button>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.8rem; color: #666;"><i class="fas fa-info-circle"></i> Нажмите «Сделать скриншот», затем сохраните изображение себе</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer><p>С нетерпением ждём встречи! 🖤🤍</p><p>По вопросам: <a href="tel:+79161234567">+7 918-868-85-00</a> (Юлия)</p></footer>
+    
+    <script>
+        // Telegram настройки (ваши данные)
+        const BOT_TOKEN = "7974277169:AAE9JGkfyEY8MaTzehKPjMBsLZk4Ht6KW4Y";
+        const CHAT_ID = "2076552370"; // Замените на ваш числовой ID от @userinfobot
+        
+        // Функция отправки в Telegram (только для "Да")
+        async function sendToTelegram(formData) {
+            const { name, contact, guests, attending, comments, timestamp } = formData;
+            const message = `🖤🤍 НОВЫЙ ГОСТЬ ПОДТВЕРДИЛ ПРИСУТСТВИЕ 🤍🖤\n\n` +
+                `👤 Имя: ${name}\n📞 Контакт: ${contact}\n👥 Гостей: ${guests}\n📝 Пожелания: ${comments || "—"}\n🕒 Время: ${timestamp}`;
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+            try {
+                const response = await fetch(url);
+                const result = await response.json();
+                if (!result.ok) throw new Error(result.description);
+                return { success: true };
+            } catch (error) {
+                console.error("Telegram error:", error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        // Таймер
+        function updateCountdown() {
+            const weddingDate = new Date("April 18, 2026 16:00:00").getTime();
+            const diff = weddingDate - new Date().getTime();
+            if (diff <= 0) { document.getElementById('countdown-timer').innerHTML = "<span>✨ Сегодня праздник! ✨</span>"; return; }
+            const days = Math.floor(diff / (86400000));
+            const hours = Math.floor((diff % 86400000) / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            document.getElementById('countdown-timer').innerHTML = `<span>${days} дн.</span><span>${hours} ч.</span><span>${minutes} мин.</span><span>${seconds} сек.</span><span>до свадьбы</span>`;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Обработка формы
+        const rsvpForm = document.getElementById('rsvpForm');
+        const formContainer = document.getElementById('rsvpFormContainer');
+        const ticketContainer = document.getElementById('ticketContainer');
+        const ticketGuestNameSpan = document.getElementById('ticketGuestName');
+        const submitBtn = document.getElementById('submitBtn');
+        const feedbackDiv = document.getElementById('formFeedback');
+        
+        rsvpForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('guestName').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            if (!name || !contact) {
+                feedbackDiv.innerHTML = '<span style="color:#b34e3a;">❌ Укажите имя и контакт</span>';
+                return;
+            }
+            const guests = document.getElementById('guestsCount').value;
+            const attending = document.querySelector('input[name="attending"]:checked').value;
+            const comments = document.getElementById('comments').value.trim();
+            const timestamp = new Date().toLocaleString('ru-RU');
+            
+            // Сохраняем в localStorage
+            let rsvpList = JSON.parse(localStorage.getItem('wedding_guests')) || [];
+            rsvpList.push({ name, contact, guests, attending, comments, timestamp });
+            localStorage.setItem('wedding_guests', JSON.stringify(rsvpList));
+            
+            if (attending === "yes") {
+                // Отправляем в Telegram
+                const formData = { name, contact, guests: guests + (guests === "1" ? " человек" : " человека"), attending: "✅ Да", comments: comments || "—", timestamp };
+                submitBtn.disabled = true;
+                submitBtn.innerText = "⏳ Отправка...";
+                const result = await sendToTelegram(formData);
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Отправить RSVP";
+                
+                if (result.success) {
+                    // Скрываем форму, показываем билет
+                    rsvpForm.style.display = "none";
+                    ticketGuestNameSpan.innerText = name;
+                    ticketContainer.style.display = "block";
+                    feedbackDiv.innerHTML = `<span style="color:#2c6e4f;">✅ Спасибо, ${name}! Вы подтвердили участие. Ваш именной билет готов!</span>`;
+                } else {
+                    feedbackDiv.innerHTML = `<span style="color:#b34e3a;">⚠️ Ошибка: ${result.error}. Но билет всё равно доступен.</span>`;
+                    rsvpForm.style.display = "none";
+                    ticketGuestNameSpan.innerText = name;
+                    ticketContainer.style.display = "block";
+                }
+            } else {
+                // Гость не придет
+                feedbackDiv.innerHTML = `<span style="color:#6c6c6c;">📌 Спасибо за ответ, ${name}. Мы будем рады видеть вас в другой раз!</span>`;
+                rsvpForm.reset();
+                setTimeout(() => { feedbackDiv.innerHTML = ''; }, 4000);
+            }
+        });
+        
+        // Функция скриншота (используем html2canvas)
+        const screenshotBtn = document.getElementById('screenshotBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        let capturedImageUrl = null;
+        
+        screenshotBtn.addEventListener('click', function() {
+            const element = document.getElementById('ticketForScreenshot');
+            html2canvas(element, {
+                scale: 2,
+                backgroundColor: '#1e1e1e',
+                logging: false
+            }).then(canvas => {
+                // Показываем кнопку скачивания
+                downloadBtn.style.display = 'inline-block';
+                // Конвертируем в ссылку
+                capturedImageUrl = canvas.toDataURL('image/png');
+                // Создаем временную ссылку для скачивания
+                const link = document.createElement('a');
+                link.download = 'svadebnyj_bilet.png';
+                link.href = capturedImageUrl;
+                link.click();
+                // Показываем уведомление
+                const msg = document.createElement('div');
+                msg.style.cssText = 'position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:#2c6e4f; color:white; padding:12px 24px; border-radius:40px; z-index:1000; font-weight:500;';
+                msg.innerHTML = '✅ Скриншот сохранён! Файл "svadebnyj_bilet.png"';
+                document.body.appendChild(msg);
+                setTimeout(() => msg.remove(), 3000);
+            }).catch(err => {
+                console.error('Ошибка скриншота:', err);
+                alert('Не удалось создать скриншот, попробуйте ещё раз');
+            });
+        });
+        
+        // Дополнительная кнопка скачивания (на случай повторного сохранения)
+        downloadBtn.addEventListener('click', function() {
+            if (capturedImageUrl) {
+                const link = document.createElement('a');
+                link.download = 'svadebnyj_bilet.png';
+                link.href = capturedImageUrl;
+                link.click();
+            } else {
+                alert('Сначала сделайте скриншот кнопкой выше');
+            }
+        });
+        
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+        
+        // Проверка Chat ID
+        if (CHAT_ID === "ВАШ_ID") console.warn("⚠️ Замените ВАШ_ID на ваш числовой ID от @userinfobot");
+    </script>
 </body>
 </html>
